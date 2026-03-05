@@ -139,7 +139,56 @@
 						{{scope.row.tongzhibeizhu}}
 					</template>
 				</el-table-column>
-				<el-table-column label="操作" width="300" :resizable='true' :sortable='true' align="left" header-align="left">
+				<el-table-column min-width="140"
+					:resizable='true'
+					:sortable='true'
+					align="left"
+					header-align="left"
+					prop="tongzhileixing"
+					label="通知类型">
+					<template #default="scope">
+						{{scope.row.tongzhileixing}}
+					</template>
+				</el-table-column>
+				<el-table-column min-width="140"
+					:resizable='true'
+					:sortable='true'
+					align="left"
+					header-align="left"
+					prop="fasongzhuangtai"
+					label="发送状态">
+					<template #default="scope">
+						<el-tag type="success" v-if="scope.row.fasongzhuangtai === '发送成功'">发送成功</el-tag>
+						<el-tag type="danger" v-else-if="scope.row.fasongzhuangtai === '发送失败'">发送失败</el-tag>
+						<el-tag type="warning" v-else-if="scope.row.fasongzhuangtai === '发送中'">发送中</el-tag>
+						<el-tag type="info" v-else>待发送</el-tag>
+					</template>
+				</el-table-column>
+				<el-table-column min-width="140"
+					:resizable='true'
+					:sortable='true'
+					align="left"
+					header-align="left"
+					prop="jieshouzhuangtai"
+					label="接收状态">
+					<template #default="scope">
+						<el-tag type="success" v-if="scope.row.jieshouzhuangtai === '已读'">已读</el-tag>
+						<el-tag type="warning" v-else-if="scope.row.jieshouzhuangtai === '已接收'">已接收</el-tag>
+						<el-tag type="info" v-else>未接收</el-tag>
+					</template>
+				</el-table-column>
+				<el-table-column min-width="140"
+					:resizable='true'
+					:sortable='true'
+					align="left"
+					header-align="left"
+					prop="jihuafasongshijian"
+					label="计划发送时间">
+					<template #default="scope">
+						{{scope.row.jihuafasongshijian}}
+					</template>
+				</el-table-column>
+				<el-table-column label="操作" width="400" :resizable='true' :sortable='true' align="left" header-align="left">
 					<template #default="scope">
 						<el-button class="view_btn" type="info" v-if=" btnAuth('jiuzhentongzhi','查看')" @click="infoClick(scope.row.id)">
 							<i class="iconfont icon-sousuo2"></i>
@@ -154,6 +203,14 @@
 						<el-button class="cross_btn" v-if="btnAuth('jiuzhentongzhi','签到')" type="success" @click="jiuzhenqiandaoCrossAddOrUpdateHandler(scope.row,'cross','','','','')">
 							<i class="iconfont icon-dingdan3"></i>
 							签到
+						</el-button>
+						<el-button class="view_btn" type="warning" @click="viewLogClick(scope.row.id)">
+							<i class="iconfont icon-sousuo2"></i>
+							查看日志
+						</el-button>
+						<el-button class="edit_btn" type="primary" v-if="scope.row.fasongzhuangtai === '发送失败'" @click="retryClick(scope.row.id)">
+							<i class="iconfont icon-xiugai5"></i>
+							重试
 						</el-button>
 					</template>
 				</el-table-column>
@@ -389,6 +446,29 @@
 			jiuzhenqiandaoFormModelRef.value.init(row.id,'cross','签到',row,'jiuzhentongzhi',statusColumnName,tips,statusColumnValue)
 		})
     }
+
+	// 查看日志
+	const viewLogClick = (id) => {
+		router.push('/tongzhifasongrizhi?tongzhiid=' + id)
+	}
+
+	// 重试发送
+	const retryClick = (id) => {
+		ElMessageBox.confirm('是否确认重试发送该通知?', '提示', {
+			confirmButtonText: '是',
+			cancelButtonText: '否',
+			type: 'warning',
+		}).then(() => {
+			context?.$http({
+				url: 'jiuzhentongzhi/retry/' + id,
+				method: 'get'
+			}).then(res => {
+				context?.$toolUtil.message('重试请求已提交', 'success')
+				getList()
+			})
+		}).catch(() => {})
+	}
+
 	//初始化
 	const init = () => {
 		getList()

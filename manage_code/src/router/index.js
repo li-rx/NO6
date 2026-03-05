@@ -18,7 +18,8 @@
 	import friendshipLink from '@/views/friendshipLink/list'
 	import messages from '@/views/messages/list'
 	import yisheng from '@/views/yisheng/list'
-	import config from '@/views/config/list'
+import config from '@/views/config/list'
+import tongzhifasongrizhi from '@/views/tongzhifasongrizhi/list'
 	import usersCenter from '@/views/users/center'
 	import yishengRegister from '@/views/yisheng/register'
 	import yishengCenter from '@/views/yisheng/center'
@@ -138,6 +139,11 @@ export const routes = [{
 			path: '/config',
 			name: '轮播图',
 			component: config
+		}
+		,{
+			path: '/tongzhifasongrizhi',
+			name: '通知发送日志',
+			component: tongzhifasongrizhi
 		}
 		]
 	},

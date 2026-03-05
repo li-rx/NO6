@@ -54,19 +54,19 @@ public class JiuzhentongzhiEntity<T> implements Serializable {
 	/**
 	 * 通知编号
 	 */
-					
+				
 	private String tongzhibianhao;
 	
 	/**
 	 * 医生账号
 	 */
-					
+				
 	private String yishengzhanghao;
 	
 	/**
 	 * 电话
 	 */
-					
+				
 	private String dianhua;
 	
 	/**
@@ -88,21 +88,72 @@ public class JiuzhentongzhiEntity<T> implements Serializable {
 	/**
 	 * 账号
 	 */
-					
+				
 	private String zhanghao;
 	
 	/**
 	 * 手机
 	 */
-					
+				
 	private String shouji;
 	
 	/**
 	 * 通知备注
 	 */
-					
+				
 	private String tongzhibeizhu;
-	
+
+	/**
+	 * 接收状态：未接收、已接收、已读
+	 */
+	private String jieshouzhuangtai;
+
+	/**
+	 * 发送状态：待发送、发送中、发送成功、发送失败
+	 */
+	private String fasongzhuangtai;
+
+	/**
+	 * 重试次数
+	 */
+	private Integer chongshicishu;
+
+	/**
+	 * 最后重试时间
+	 */
+	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat
+	private Date zuizhongchongshishijian;
+
+	/**
+	 * 发送失败原因
+	 */
+	private String fasongshibaiyuanyin;
+
+	/**
+	 * 通知类型：预约成功提醒、就诊前24小时提醒、就诊前1小时提醒、就诊当天提醒
+	 */
+	private String tongzhileixing;
+
+	/**
+	 * 计划发送时间
+	 */
+	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat
+	private Date jihuafasongshijian;
+
+	/**
+	 * 实际发送时间
+	 */
+	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat
+	private Date shijifasongshijian;
+
+	/**
+	 * 关联的预约ID
+	 */
+	private Long yuyueid;
+
 
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat
@@ -216,6 +267,123 @@ public class JiuzhentongzhiEntity<T> implements Serializable {
 	 */
 	public String getTongzhibeizhu() {
 		return tongzhibeizhu;
+	}
+
+	/**
+	 * 设置：接收状态
+	 */
+	public void setJieshouzhuangtai(String jieshouzhuangtai) {
+		this.jieshouzhuangtai = jieshouzhuangtai;
+	}
+	/**
+	 * 获取：接收状态
+	 */
+	public String getJieshouzhuangtai() {
+		return jieshouzhuangtai;
+	}
+
+	/**
+	 * 设置：发送状态
+	 */
+	public void setFasongzhuangtai(String fasongzhuangtai) {
+		this.fasongzhuangtai = fasongzhuangtai;
+	}
+	/**
+	 * 获取：发送状态
+	 */
+	public String getFasongzhuangtai() {
+		return fasongzhuangtai;
+	}
+
+	/**
+	 * 设置：重试次数
+	 */
+	public void setChongshicishu(Integer chongshicishu) {
+		this.chongshicishu = chongshicishu;
+	}
+	/**
+	 * 获取：重试次数
+	 */
+	public Integer getChongshicishu() {
+		return chongshicishu;
+	}
+
+	/**
+	 * 设置：最后重试时间
+	 */
+	public void setZuizhongchongshishijian(Date zuizhongchongshishijian) {
+		this.zuizhongchongshishijian = zuizhongchongshishijian;
+	}
+	/**
+	 * 获取：最后重试时间
+	 */
+	public Date getZuizhongchongshishijian() {
+		return zuizhongchongshishijian;
+	}
+
+	/**
+	 * 设置：发送失败原因
+	 */
+	public void setFasongshibaiyuanyin(String fasongshibaiyuanyin) {
+		this.fasongshibaiyuanyin = fasongshibaiyuanyin;
+	}
+	/**
+	 * 获取：发送失败原因
+	 */
+	public String getFasongshibaiyuanyin() {
+		return fasongshibaiyuanyin;
+	}
+
+	/**
+	 * 设置：通知类型
+	 */
+	public void setTongzhileixing(String tongzhileixing) {
+		this.tongzhileixing = tongzhileixing;
+	}
+	/**
+	 * 获取：通知类型
+	 */
+	public String getTongzhileixing() {
+		return tongzhileixing;
+	}
+
+	/**
+	 * 设置：计划发送时间
+	 */
+	public void setJihuafasongshijian(Date jihuafasongshijian) {
+		this.jihuafasongshijian = jihuafasongshijian;
+	}
+	/**
+	 * 获取：计划发送时间
+	 */
+	public Date getJihuafasongshijian() {
+		return jihuafasongshijian;
+	}
+
+	/**
+	 * 设置：实际发送时间
+	 */
+	public void setShijifasongshijian(Date shijifasongshijian) {
+		this.shijifasongshijian = shijifasongshijian;
+	}
+	/**
+	 * 获取：实际发送时间
+	 */
+	public Date getShijifasongshijian() {
+		return shijifasongshijian;
+	}
+
+	/**
+	 * 设置：关联的预约ID
+	 */
+	public void setYuyueid(Long yuyueid) {
+		this.yuyueid = yuyueid;
+	}
+	/**
+	 * 获取：关联的预约ID
+	 */
+	public Long getYuyueid() {
+		return yuyueid;
 	}
 
 }

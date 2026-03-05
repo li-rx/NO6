@@ -3,7 +3,6 @@
 
 <mapper namespace="com.cl.dao.JiuzhentongzhiDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.cl.entity.JiuzhentongzhiEntity" id="jiuzhentongzhiMap">
         <result property="tongzhibianhao" column="tongzhibianhao"/>
         <result property="yishengzhanghao" column="yishengzhanghao"/>
@@ -13,20 +12,24 @@
         <result property="zhanghao" column="zhanghao"/>
         <result property="shouji" column="shouji"/>
         <result property="tongzhibeizhu" column="tongzhibeizhu"/>
+        <result property="jieshouzhuangtai" column="jieshouzhuangtai"/>
+        <result property="fasongzhuangtai" column="fasongzhuangtai"/>
+        <result property="chongshicishu" column="chongshicishu"/>
+        <result property="zuizhongchongshishijian" column="zuizhongchongshishijian"/>
+        <result property="fasongshibaiyuanyin" column="fasongshibaiyuanyin"/>
+        <result property="tongzhileixing" column="tongzhileixing"/>
+        <result property="jihuafasongshijian" column="jihuafasongshijian"/>
+        <result property="shijifasongshijian" column="shijifasongshijian"/>
+        <result property="yuyueid" column="yuyueid"/>
     </resultMap>
 
-    <select id="selectListView"
-		resultType="com.cl.entity.view.JiuzhentongzhiView" >
-
-		SELECT  jiuzhentongzhi.* FROM jiuzhentongzhi  jiuzhentongzhi 	        
+    <select id="selectListView" resultType="com.cl.entity.view.JiuzhentongzhiView">
+        SELECT jiuzhentongzhi.* FROM jiuzhentongzhi jiuzhentongzhi 	        
         <where> 1=1 ${ew.sqlSegment}</where>
-	</select>
-	
-	<select id="selectView"
-		resultType="com.cl.entity.view.JiuzhentongzhiView" >
-		SELECT * FROM jiuzhentongzhi  jiuzhentongzhi <where> 1=1 ${ew.sqlSegment}</where>
-	</select>
-
-
+    </select>
+    
+    <select id="selectView" resultType="com.cl.entity.view.JiuzhentongzhiView">
+        SELECT * FROM jiuzhentongzhi jiuzhentongzhi <where> 1=1 ${ew.sqlSegment}</where>
+    </select>
 
 </mapper>

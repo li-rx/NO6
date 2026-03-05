@@ -7,6 +7,7 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+import com.cl.service.NotificationSendService;
 import com.cl.utils.ValidatorUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,13 +49,8 @@ public class YishengyuyueController {
     @Autowired
     private YishengyuyueService yishengyuyueService;
 
-
-
-
-
-
-
-
+    @Autowired
+    private NotificationSendService notificationSendService;
 
     /**
      * 后台列表
@@ -70,7 +66,7 @@ public class YishengyuyueController {
                     yishengyuyue.setZhanghao((String)request.getSession().getAttribute("username"));
                                     }
                                                                                                                                                                                 EntityWrapper<YishengyuyueEntity> ew = new EntityWrapper<YishengyuyueEntity>();
-                                                                                                                                                                                                                        
+                                                                                                                                                                                                        
         
         
         PageUtils page = yishengyuyueService.queryPage(params, MPUtil.sort(MPUtil.between(MPUtil.likeOrEq(ew, yishengyuyue), params), params));
@@ -190,6 +186,11 @@ public class YishengyuyueController {
             yishengyuyue.setSfsh(sfsh);
             yishengyuyue.setShhf(shhf);
             list.add(yishengyuyue);
+
+            // 如果审核通过，自动创建所有后续通知
+            if("是".equals(sfsh)) {
+                notificationSendService.createAllNotifications(yishengyuyue);
+            }
         }
         yishengyuyueService.updateBatchById(list);
         return R.ok();
@@ -209,7 +210,6 @@ public class YishengyuyueController {
     }
     
 	
-
 
 
 
@@ -384,7 +384,6 @@ public class YishengyuyueController {
         }
         return R.ok().put("data", result);
     }
-
 
 
 
