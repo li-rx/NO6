@@ -23,9 +23,20 @@ public class AutoRunWeb {
         String url2 = "http://localhost:" + appPort + "/"+"cl515882190/manage/index.html#/login";
         Runtime runtime = Runtime.getRuntime();
         try {
-            // rundll32 url.dll,FileProtocolHandler是Windows系统下用来打开默认浏览器并访问指定URL的命令
-            runtime.exec("rundll32 url.dll,FileProtocolHandler " + url1);
-            runtime.exec("rundll32 url.dll,FileProtocolHandler " + url2);
+            String os = System.getProperty("os.name").toLowerCase();
+            if (os.contains("win")) {
+                // Windows系统
+                runtime.exec("rundll32 url.dll,FileProtocolHandler " + url1);
+                runtime.exec("rundll32 url.dll,FileProtocolHandler " + url2);
+            } else if (os.contains("mac")) {
+                // macOS系统
+                runtime.exec("open " + url1);
+                runtime.exec("open " + url2);
+            } else if (os.contains("nix") || os.contains("nux")) {
+                // Linux系统
+                runtime.exec("xdg-open " + url1);
+                runtime.exec("xdg-open " + url2);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
