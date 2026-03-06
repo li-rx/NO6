@@ -1,23 +1,18 @@
 # Tomcat
 server:
-  port: 8080
-  tomcat:
-    uri-encoding: UTF-8
-  servlet:
-    context-path: /cl515882190
+    tomcat:
+        uri-encoding: UTF-8
+    port: 8080
+    servlet:
+        context-path: /cl515882190
 
 
 spring:
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/cl515882190?useUnicode=true&characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: "!QAZ2wsx"
-
-#        driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
-#        url: jdbc:sqlserver://127.0.0.1:1433;DatabaseName=cl515882190
-#        username: sa
-#        password: 123456
+    datasource:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/cl515882190?useUnicode=true&characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&useSSL=false
+        username: root
+        password: !QAZ2wsx
 
     servlet:
       multipart:
